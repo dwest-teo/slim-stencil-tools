@@ -181,7 +181,8 @@ gulp.task('lint-test', lintTest);
 gulp.task('lint-gulpfile', lintGulpfile);
 
 // Lint everything
-gulp.task('lint', ['lint-src', 'lint-test', 'lint-gulpfile']);
+// gulp.task('lint', ['lint-src', 'lint-test', 'lint-gulpfile']);
+gulp.task('lint', ['lint-src']);
 
 // Build two versions of the library
 gulp.task('build', ['lint', 'clean'], build);
