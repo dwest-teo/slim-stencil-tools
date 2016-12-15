@@ -1,6 +1,5 @@
 import fetchStatus from '../lib/fetch-status';
 import buildParams from '../lib/build-params';
-import dataTemplate from '../lib/data-template';
 
 /**
  * @description
@@ -42,8 +41,8 @@ export const bcClient = (opts = defaultOpts) => {
   const data = options.formData ? options.formData : buildParams(options.params);
   const url = options.remote ? `/remote/v1${options.url}` : options.url;
   const reqUrl = options.reqUrl ? `${url}?${data}` : url;
-  const template = options.component
-    ? dataTemplate(options.componentPath, options.component, options.componentSuffix)
+  const dataTemplate = options.component
+    ? `${options.componentPath}/${options.component.toLowerCase()}-${options.componentSuffix}`
     : null;
 
   return new Promise((resolve, reject) => {
@@ -55,7 +54,7 @@ export const bcClient = (opts = defaultOpts) => {
           ? JSON.stringify(options.config)
           : '{}',
         'stencil-options': options.component
-          ? JSON.stringify({ render_with: template })
+          ? JSON.stringify({ render_with: dataTemplate })
           : '{}',
       },
       body: options.method === 'GET' ? null : data,
