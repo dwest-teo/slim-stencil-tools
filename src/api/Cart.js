@@ -1,13 +1,23 @@
 import { bcClient } from './Base';
 
-export const getCartContent = () => new Promise((resolve, reject) => {
+/**
+ * @description
+ * Retrieve cart data
+ * @param {String} component
+ */
+export const getCartContent = (component = 'cart') => new Promise((resolve, reject) => {
   bcClient({
     url: '/cart.php',
-    component: 'cart',
+    component,
   }).then(response => resolve(response))
   .catch(error => reject(new Error(error)));
 });
 
+/**
+ * @description
+ * Add product to cart using FormData formatted per Cornerstone's default product page
+ * @param {FormData} formData
+ */
 export const addToCart = (formData) => new Promise((resolve, reject) => {
   bcClient({
     url: '/cart/add',
@@ -18,6 +28,11 @@ export const addToCart = (formData) => new Promise((resolve, reject) => {
   .catch(error => reject(new Error(error)));
 });
 
+/**
+ * @description
+ * Remove product from cart by id
+ * @param {String} itemId
+ */
 export const removeFromCart = (itemId) => {
   const removeFromCartData = new FormData();
   removeFromCartData.append('items[0][id]', itemId);
@@ -39,6 +54,11 @@ export const removeFromCart = (itemId) => {
   });
 };
 
+/**
+ * @description
+ * Change quantity in cart by id & qty
+ * @param {Object} opts
+ */
 export const updateCartQty = (opts) => {
   const updateQtyCartData = new FormData();
   updateQtyCartData.append('items[0][id]', opts.itemId);
@@ -60,6 +80,11 @@ export const updateCartQty = (opts) => {
   });
 };
 
+/**
+ * @description
+ * Get shipping estimate for items in cart
+ * @param {Object} opts
+ */
 export const getShippingEstimate = (opts) => new Promise((resolve, reject) => {
   bcClient({
     url: '/shipping-quote',
@@ -76,6 +101,11 @@ export const getShippingEstimate = (opts) => new Promise((resolve, reject) => {
   }).catch(error => reject(new Error(error)));
 });
 
+/**
+ * @description
+ * Submit selected shipping estimate
+ * @param {Object} params
+ */
 export const submitShippingEstimate = (params) => new Promise((resolve, reject) => {
   bcClient({
     url: '/shipping-quote',
@@ -94,6 +124,11 @@ export const submitShippingEstimate = (params) => new Promise((resolve, reject) 
   }).catch(error => reject(new Error(error)));
 });
 
+/**
+ * @description
+ * Submit coupon or gift certificate code
+ * @param {String} code
+ */
 export const submitCouponCode = (code) => new Promise((resolve, reject) => {
   bcClient({
     url: '/apply-code',

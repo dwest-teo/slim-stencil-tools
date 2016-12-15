@@ -1,9 +1,21 @@
 import fetchStatus from '../lib/fetch-status';
 
+/**
+ * @description
+ * Default options object to be merged with user specified options
+ * @param {String} url
+ * @param {String} method ['GET', 'POST', 'PUT', 'DELETE']
+ * @param {String} component
+ * @param {Boolean} remote
+ * @param {Boolean} reqUrl
+ * @param {FormData} formData
+ * @param {Object} params
+ * @param {Object} config
+ * @param {Object} headers
+ */
 const defaultOpts = {
   url: '',
   method: 'GET',
-  actionName: '',
   component: null,
   remote: false,
   reqUrl: false,
@@ -13,6 +25,11 @@ const defaultOpts = {
   headers: {},
 };
 
+/**
+ * @description
+ * Simple function to convert object to url params if FormData isn't being used
+ * @param {Object} obj
+ */
 const buildParams = (obj) => {
   const str = Object.keys(obj).map(
     key => `${encodeURIComponent(key)}=${encodeURIComponent(obj[key])}`
@@ -21,6 +38,12 @@ const buildParams = (obj) => {
   return str;
 };
 
+
+/**
+ * @description
+ * Base BigCommerce API client function
+ * @param {Object} opts
+ */
 // eslint-disable-next-line import/prefer-default-export
 export const bcClient = (opts = defaultOpts) => {
   const options = Object.assign({}, defaultOpts, opts);

@@ -1,5 +1,11 @@
 import fetchStatus from '../lib/fetch-status';
 
+/**
+ * @description
+ * Fetch a page by URL, render with specified template
+ * @param {String} url
+ * @param {String} template
+ */
 // eslint-disable-next-line import/prefer-default-export
 export const getPage = (url, template) => new Promise((resolve, reject) => {
   fetch(url, {
