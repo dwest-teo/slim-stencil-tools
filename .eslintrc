@@ -14,5 +14,12 @@
     "jsx-a11y",
   ],
   "extends": "airbnb",
-  "rules": {},
+  "rules": {
+    "import/no-extraneous-dependencies": 1,
+    "no-underscore-dangle": 1,
+    "global-require": 1,
+    "func-names": 1,
+    "no-unneeded-ternary": 1,
+    "no-param-reassign": 1,
+  }
 }
