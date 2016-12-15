@@ -139,16 +139,6 @@ Retrieve product data by product id and render it to a specified "data" componen
   ProductApi.getProduct(12345, 'quick-view');
 ```
 
-##### imageUrl
-```javascript
-  import { imageUrl } from 'slim-stencil-tools';
-```
-
-The `imageUrl` function is a utility function that creates a URL string from a Stencil image "data" attribute and a supplied size string.
-```javascript
-  const url = imageUrl(imageData, '600x600');
-```
-
 ### Notes
 slim-stencil-tools uses modern JavaScript APIs and capabilities that might not be supported in older browsers, specifically ES6 promises and the Fetch API.  You'll likely need to polyfill for best browser support.  The standard stencil theme's dependencies includes babel-polyfill which should take care of the ES6 promises, but here's a [great alternative](https://github.com/stefanpenner/es6-promise) just in case you aren't using babel-polyfill.
 
