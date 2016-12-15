@@ -1,4 +1,6 @@
 import fetchStatus from '../lib/fetch-status';
+import buildParams from '../lib/build-params';
+import dataTemplate from '../lib/data-template';
 
 /**
  * @description
@@ -31,20 +33,6 @@ const defaultOpts = {
 
 /**
  * @description
- * Simple function to convert object to url params if FormData isn't being used
- * @param {Object} obj
- */
-const buildParams = (obj) => {
-  const str = Object.keys(obj).map(
-    key => `${encodeURIComponent(key)}=${encodeURIComponent(obj[key])}`
-  ).join('&');
-
-  return str;
-};
-
-
-/**
- * @description
  * Base BigCommerce API client function
  * @param {Object} opts
  */
@@ -54,17 +42,21 @@ export const bcClient = (opts = defaultOpts) => {
   const data = options.formData ? options.formData : buildParams(options.params);
   const url = options.remote ? `/remote/v1${options.url}` : options.url;
   const reqUrl = options.reqUrl ? `${url}?${data}` : url;
+  const template = options.component
+    ? dataTemplate(options.componentPath, options.component, options.componentSuffix)
+    : null;
 
   return new Promise((resolve, reject) => {
     fetch(reqUrl, {
       method: options.method,
       headers: {
         ...options.headers,
-        'stencil-config': options.config ? JSON.stringify(options.config) : '{}',
-        'stencil-options': options.component ? JSON.stringify({
-          // eslint-disable-next-line max-len
-          render_with: `${options.componentPath}/${options.component.toLowerCase()}-${options.componentSuffix}`,
-        }) : '{}',
+        'stencil-config': options.config
+          ? JSON.stringify(options.config)
+          : '{}',
+        'stencil-options': options.component
+          ? JSON.stringify({ render_with: template })
+          : '{}',
       },
       body: options.method === 'GET' ? null : data,
       credentials: 'include',

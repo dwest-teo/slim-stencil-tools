@@ -1,21 +1,18 @@
-import fetchStatus from '../lib/fetch-status';
+import { bcClient } from './Base';
 
 /**
  * @description
  * Fetch a page by URL, render with specified template
  * @param {String} url
- * @param {String} template
+ * @param {String} component
+ * @param {Object} opts
  */
 // eslint-disable-next-line import/prefer-default-export
-export const getPage = (url, template) => new Promise((resolve, reject) => {
-  fetch(url, {
-    headers: {
-      'stencil-config': '{}',
-      'stencil-options': JSON.stringify({ render_with: template }),
-    },
-    credentials: 'include',
-  }).then(fetchStatus)
-  .then(response => response.json())
-  .then(res => resolve(JSON.parse(res)))
+export const getPage = (url, component, opts = {}) => new Promise((resolve, reject) => {
+  bcClient({
+    url,
+    component,
+    ...opts,
+  }).then(response => resolve(response))
   .catch(error => reject(new Error(error)));
 });

@@ -1,7 +1,7 @@
 {
   "name": "slim-stencil-tools",
-  "version": "0.1.2",
-  "description": "Lightweight, jQuery-free utility library for BigCommerce Stencil themes",
+  "version": "0.3.0",
+  "description": "A lightweight and modern alternative utility library for Bigcommerce Stencil themes",
   "main": "dist/slim-stencil-tools.js",
   "scripts": {
     "test": "gulp",
@@ -15,7 +15,11 @@
     "type": "git",
     "url": "https://github.com/dwest-teo/slim-stencil-tools.git"
   },
-  "keywords": [],
+  "keywords": [
+    "bigcommerce",
+    "stencil-utils",
+    "stencil",
+  ],
   "author": "Donny West <donnywest@gmail.com>",
   "license": "MIT",
   "bugs": {

@@ -104,10 +104,22 @@ Submit a coupon or gift certificate code.
 ```
 
 ###### getShippingEstimate(opts)
-Retrieve a shipping estimate for items in the cart.  Example coming soon.
+Retrieve a shipping estimate for items in the cart.  Accepts an object containing the ship-to information.
+```javascript
+  const shipTo = {
+    country_id: 226,
+    state_id: 18,
+    city: 'Gainesville',
+    zip_code: '32653',
+  };
+  const shippingQuotes = CartApi.getShippingEstimate(shipTo);
+```
 
 ###### submitShippingEstimate(params)
-Submit selected shipping estimate.  Example coming soon.
+Submit selected shipping estimate.  Accepts the selected shipping method id.
+```javascript
+  CartApi.submitShippingEstimate(3);
+```
 
 ##### Page
 ```javascript

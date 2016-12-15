@@ -4,7 +4,7 @@ import { bcClient } from './Base';
  * @description
  * Retrieve cart data
  * @param {String} component
- * @param {Object} component
+ * @param {Object} opts
  */
 export const getCartContent = (component = 'cart', opts = {}) => new Promise((resolve, reject) => {
   bcClient({
@@ -108,7 +108,7 @@ export const getShippingEstimate = (opts) => new Promise((resolve, reject) => {
  * Submit selected shipping estimate
  * @param {Object} params
  */
-export const submitShippingEstimate = (params) => new Promise((resolve, reject) => {
+export const submitShippingEstimate = (methodId) => new Promise((resolve, reject) => {
   bcClient({
     url: '/shipping-quote',
     method: 'POST',
@@ -116,7 +116,9 @@ export const submitShippingEstimate = (params) => new Promise((resolve, reject) 
     headers: {
       'Content-Type': 'application/x-www-form-urlencoded',
     },
-    params,
+    params: {
+      shipping_method: methodId,
+    },
   }).then(response => {
     if (response.status !== 'failed') {
       resolve(response);
