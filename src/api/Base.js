@@ -5,6 +5,8 @@ import fetchStatus from '../lib/fetch-status';
  * Default options object to be merged with user specified options
  * @param {String} url
  * @param {String} method ['GET', 'POST', 'PUT', 'DELETE']
+ * @param {String} componentPath
+ * @param {String} componentSuffix
  * @param {String} component
  * @param {Boolean} remote
  * @param {Boolean} reqUrl
@@ -16,6 +18,8 @@ import fetchStatus from '../lib/fetch-status';
 const defaultOpts = {
   url: '',
   method: 'GET',
+  componentPath: 'data',
+  componentSuffix: 'data',
   component: null,
   remote: false,
   reqUrl: false,
@@ -58,7 +62,8 @@ export const bcClient = (opts = defaultOpts) => {
         ...options.headers,
         'stencil-config': options.config ? JSON.stringify(options.config) : '{}',
         'stencil-options': options.component ? JSON.stringify({
-          render_with: `data/${options.component.toLowerCase()}-data`,
+          // eslint-disable-next-line max-len
+          render_with: `${options.componentPath}/${options.component.toLowerCase()}-${options.componentSuffix}`,
         }) : '{}',
       },
       body: options.method === 'GET' ? null : data,

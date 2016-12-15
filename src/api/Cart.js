@@ -4,11 +4,13 @@ import { bcClient } from './Base';
  * @description
  * Retrieve cart data
  * @param {String} component
+ * @param {Object} component
  */
-export const getCartContent = (component = 'cart') => new Promise((resolve, reject) => {
+export const getCartContent = (component = 'cart', opts = {}) => new Promise((resolve, reject) => {
   bcClient({
     url: '/cart.php',
     component,
+    ...opts,
   }).then(response => resolve(response))
   .catch(error => reject(new Error(error)));
 });
