@@ -4,6 +4,6 @@
  * @param {String} data
  * @param {String} size
  */
-const imageUrl = (data, size) => data.replace('{:size}', size);
-
-export default imageUrl;
+export default function imageUrl(data, size) {
+  return data.replace('{:size}', size);
+}
