@@ -1,6 +1,6 @@
 {
   "name": "slim-stencil-tools",
-  "version": "0.4.3",
+  "version": "0.4.4",
   "description": "A lightweight and modern alternative utility library for Bigcommerce Stencil themes",
   "main": "dist/slim-stencil-tools.js",
   "scripts": {
